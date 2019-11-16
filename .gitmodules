@@ -1,0 +1,9 @@
+[submodule "lib184/glfw"]
+	path = lib184/glfw
+	url = https://github.com/glfw/glfw/
+[submodule "lib184/imgui"]
+	path = lib184/imgui
+	url = https://github.com/ocornut/imgui/
+[submodule "nanosvg"]
+	path = nanosvg
+	url = https://github.com/memononen/nanosvg
