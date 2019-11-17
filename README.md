@@ -1,5 +1,11 @@
 # svg-rasterizer
-An educational SVG rasterizer that mimics how a GPU works.
+An educational SVG rasterizer that mimics a GPU rasterization pipeline.
+
+# External libraries used
+- GLAD
+- GLFW
+- ImGUI
+- nanosvg
 
 # Runtime Dependency
 - OpenGL > 3.0

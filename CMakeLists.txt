@@ -8,7 +8,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Source code
-set(SRCFILES src/main.cpp)
+set(SRCFILES src/main.cpp
+             src/RasterSVG.cpp
+             src/renderers/line.cpp)
 
 add_executable(Rasterizer ${SRCFILES})
 

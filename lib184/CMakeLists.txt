@@ -17,6 +17,7 @@ add_library(lib184 ${SRCFILES} ${IMGUISRC})
 
 target_include_directories(lib184 PUBLIC .)
 target_include_directories(lib184 PUBLIC imgui/)
+target_include_directories(lib184 PUBLIC glm/)
 
 # Libraries
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
@@ -32,3 +33,6 @@ target_link_libraries(lib184 PUBLIC ${OPENGL_gl_LIBRARY})
 
 add_subdirectory(glad)
 target_link_libraries(lib184 PUBLIC glad)
+
+add_subdirectory(glm)
+target_include_directories(lib184 PUBLIC glm)

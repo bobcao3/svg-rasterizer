@@ -7,3 +7,6 @@
 [submodule "nanosvg"]
 	path = nanosvg
 	url = https://github.com/memononen/nanosvg
+[submodule "lib184/glm"]
+	path = lib184/glm
+	url = https://github.com/g-truc/glm
