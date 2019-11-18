@@ -7,7 +7,7 @@
 
 using namespace std::chrono;
 
-RasterSVG::RasterSVG(std::string file, double dpi)
+RasterSVG::RasterSVG(std::string file)
 {
 	// Use nanosvg to parse SVG file
 	std::cout << "Reading SVG file: " << file << std::endl;

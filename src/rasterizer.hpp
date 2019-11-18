@@ -19,7 +19,7 @@ private:
 	std::string filename = "SVG output";
 
 public:
-	RasterSVG(std::string file, double dpi);
+	RasterSVG(std::string file);
 	~RasterSVG();
 
 	void rasterize();
@@ -28,8 +28,6 @@ public:
 
 class RasterizerApp : public Application {
 private:
-    float dpi = 96.0f;
-
     std::vector<RasterSVG> images;
 
 public:
