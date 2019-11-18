@@ -5,6 +5,8 @@ project(lib184)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+add_compile_options( -DGLM_FORCE_SSE4 -O3 )
+
 # Source code
 set(IMGUISRC imgui/examples/imgui_impl_opengl3.cpp
              imgui/examples/imgui_impl_glfw.cpp

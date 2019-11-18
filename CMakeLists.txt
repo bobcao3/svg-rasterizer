@@ -7,6 +7,8 @@ project(Rasterizer VERSION 0.1)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+add_compile_options( -DGLM_FORCE_SSE4 -O3 )
+
 # Source code
 set(SRCFILES src/main.cpp
              src/RasterSVG.cpp
