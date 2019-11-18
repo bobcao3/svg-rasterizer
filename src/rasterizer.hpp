@@ -2,7 +2,7 @@
 
 #include "application.hpp"
 
-#include "nanosvg.h"
+#include "svg.h"
 
 #include "renderers/line.hpp"
 
@@ -11,7 +11,7 @@
 
 class RasterSVG {
 private:
-	NSVGimage *svg = NULL;
+	SVG svg;
 
 	Image<u8vec4> *image;
 	GLuint image_texture = 0;

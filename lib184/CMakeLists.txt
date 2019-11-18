@@ -11,13 +11,18 @@ set(IMGUISRC imgui/examples/imgui_impl_opengl3.cpp
              imgui/imgui.cpp
              imgui/imgui_draw.cpp
              imgui/imgui_widgets.cpp)
-set(SRCFILES application.cpp)
+set(SRCFILES application.cpp
+             color.cpp
+             tinyxml2/tinyxml2.cpp
+             lodepng.cpp
+             base64.cpp)
 
 add_library(lib184 ${SRCFILES} ${IMGUISRC})
 
 target_include_directories(lib184 PUBLIC .)
 target_include_directories(lib184 PUBLIC imgui/)
 target_include_directories(lib184 PUBLIC glm/)
+target_include_directories(lib184 PUBLIC tinyxml2/)
 
 # Libraries
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)

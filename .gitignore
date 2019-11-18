@@ -33,3 +33,8 @@
 
 # Build Directory
 build/
+
+# IDE / Editor configs
+.vscode
+.idea
+.vs

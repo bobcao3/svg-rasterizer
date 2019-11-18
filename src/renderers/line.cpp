@@ -30,6 +30,9 @@ LineRenderer::Rasterize(std::vector<PixelInput>::iterator first_vertex,
 	PixelInput p0 = *first_vertex;
 	PixelInput p1 = *(first_vertex + 1);
 
+	p0.position = round(p0.position);
+	p1.position = round(p1.position);
+
 	vec2 direction = p1.position - p0.position;
 
 	std::vector<PixelInput> fragments;
@@ -67,6 +70,7 @@ void LineRenderer::render(Image<u8vec4> &target,
 		auto fragments =
 			Rasterize(points.begin(), points.end(), constants);
 
+		#pragma omp parallel for
 		for (auto pixel_input : fragments) {
 			PixelOutput output;
 			PixelShader(pixel_input, output, constants);

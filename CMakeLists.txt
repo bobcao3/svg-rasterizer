@@ -10,6 +10,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Source code
 set(SRCFILES src/main.cpp
              src/RasterSVG.cpp
+             src/svg.cpp
+             src/svgparser.cpp
+             src/triangulation.cpp
+             src/renderers/texture.cpp
              src/renderers/line.cpp)
 
 add_executable(Rasterizer ${SRCFILES})

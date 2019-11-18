@@ -10,9 +10,7 @@
 
 using namespace glm;
 
-class Texture {
-
-};
+#include "texture.h"
 
 struct VertexInput {
 	vec2 position;
@@ -31,9 +29,9 @@ struct PixelOutput {
 };
 
 struct Constants {
-	std::shared_ptr<Texture> texture = nullptr;
-	mat3 transformation = mat3(1.0);
-	int msaa_count = 1;
+	std::shared_ptr<Texture> texture;
+	mat3 transformation;
+	int msaa_count;
 };
 
 class Renderer {
@@ -56,4 +54,10 @@ public:
 			std::vector<VertexInput>::iterator first_vertex,
 			std::vector<VertexInput>::iterator last_vertex,
 			Constants &constants) = 0;
+};
+
+struct DrawCommand {
+	Renderer* renderer;
+	std::vector<VertexInput> vertex_buffer;
+	Constants constants;
 };
