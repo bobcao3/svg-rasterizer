@@ -17,7 +17,7 @@ RasterSVG::RasterSVG(std::string file)
 	filename = file;
 
 	// Prepare render target buffer (host side)
-	image = new Image<u8vec4>(ceil(svg.width), ceil(svg.height), u8vec4(0));
+	image = new Image<u8vec4>(ceil(svg.width), ceil(svg.height), u8vec4(255, 255, 255, 255));
 
 	// Render into render target buffer
 	std::vector<DrawCommand> cmds;
@@ -29,8 +29,10 @@ RasterSVG::RasterSVG(std::string file)
 							 cmd.vertex_buffer.end(), cmd.constants);
 	}
 	std::cout << "Render time: "
-			  << duration_cast<duration<double>>(
-					 high_resolution_clock::now() - start).count() * 1e3
+			  << duration_cast<duration<double> >(high_resolution_clock::now() -
+												  start)
+						 .count() *
+					 1e3
 			  << " ms" << std::endl;
 
 	// Create texture on GPU if it does not exist,
@@ -57,5 +59,31 @@ void RasterSVG::render()
 	ImGui::Begin(filename.data());
 	ImGui::Image((void *)(intptr_t)image_texture,
 				 ImVec2(image->xsize(), image->ysize()));
+
+	if (ImGui::TreeNodeEx("Pixel Inspector")) {
+		ImVec2 cursor_pos = ImGui::GetMousePos();
+		ImVec2 window_pos = ImGui::GetWindowPos();
+		ImVec2 window_content_min = ImGui::GetWindowContentRegionMin();
+		cursor_pos.x -= window_pos.x + window_content_min.x;
+		cursor_pos.y -= window_pos.y + window_content_min.y;
+		inspecting_pos.x = glm::clamp(cursor_pos.x - inspecting_area.x / 2, .0f,
+									  (float)image->xsize());
+		inspecting_pos.y = glm::clamp(cursor_pos.y - inspecting_area.y / 2, .0f,
+									  (float)image->ysize());
+		ImGui::Text("Inspecting Position %f %f", inspecting_pos.x,
+					inspecting_pos.y);
+
+		ImGui::Image(
+			(void *)(intptr_t)image_texture,
+			ImVec2(inspecting_area.x * zoomScale,
+				   inspecting_area.y * zoomScale),
+			ImVec2(inspecting_pos.x / image->xsize(),
+				   inspecting_pos.y / image->ysize()),
+			ImVec2((inspecting_pos.x + inspecting_area.x) / image->xsize(),
+				   (inspecting_pos.y + inspecting_area.y) / image->ysize()));
+
+		ImGui::TreePop();
+	}
+
 	ImGui::End();
 }

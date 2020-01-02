@@ -19,6 +19,10 @@ private:
 	std::string filename = "SVG output";
 
 public:
+	glm::vec2 inspecting_pos = glm::vec2(0);
+	glm::vec2 inspecting_area = glm::vec2(32);
+	float zoomScale = 4;
+
 	RasterSVG(std::string file);
 	~RasterSVG();
 
