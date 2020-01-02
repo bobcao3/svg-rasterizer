@@ -41,7 +41,6 @@ template <class T> class Image {
 		this->xs = xs;
 		this->ys = ys;
 		this->none = none;
-		buffer.resize(xs * ys);
-		std::fill(buffer.begin(), buffer.end(), none);
+		buffer.resize(xs * ys, none);
 	}
 };
