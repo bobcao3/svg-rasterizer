@@ -3,7 +3,7 @@
 	url = https://github.com/glfw/glfw
 [submodule "lib184/imgui"]
 	path = lib184/imgui
-	url = https://github.com/ocornut/imgui
+	url = https://github.com/adobe/imgui
 [submodule "lib184/glm"]
 	path = lib184/glm
 	url = https://github.com/g-truc/glm

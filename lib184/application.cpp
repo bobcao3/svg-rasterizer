@@ -1,5 +1,6 @@
 #include "application.hpp"
 
+#include <imgui/spectrum.h>
 #include <iostream>
 
 int runApplication(Application &app, int argc, char **argv)
@@ -51,7 +52,7 @@ int runApplication(Application &app, int argc, char **argv)
 	ImGui_ImplGlfw_InitForOpenGL(app.window, true);
 	ImGui_ImplOpenGL3_Init("#version 150");
 	// Setup Dear ImGui style
-	ImGui::StyleColorsLight();
+	ImGui::Spectrum::StyleColorsSpectrum();
 
 	// Call application init
 	app.init();
