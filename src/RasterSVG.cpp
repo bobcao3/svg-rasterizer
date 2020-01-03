@@ -17,7 +17,8 @@ RasterSVG::RasterSVG(std::string file)
 	filename = file;
 
 	// Prepare render target buffer (host side)
-	image = new Image<u8vec4>(ceil(svg.width), ceil(svg.height), u8vec4(255, 255, 255, 255));
+	image = new Image<u8vec4>(ceil(svg.width), ceil(svg.height),
+							  u8vec4(255, 255, 255, 255));
 
 	// Render into render target buffer
 	std::vector<DrawCommand> cmds;
@@ -46,6 +47,7 @@ RasterSVG::RasterSVG(std::string file)
 	// Transfer buffer to GPU as texture
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, image->xsize(), image->ysize(), 0,
 				 GL_RGBA, GL_UNSIGNED_BYTE, image->data());
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 RasterSVG::~RasterSVG()
@@ -56,9 +58,13 @@ RasterSVG::~RasterSVG()
 void RasterSVG::render()
 {
 	// Create the output panel
-	ImGui::Begin(filename.data());
 	ImGui::Image((void *)(intptr_t)image_texture,
 				 ImVec2(image->xsize(), image->ysize()));
+	
+	if (ImGui::TreeNodeEx("Render Control")) {
+
+		ImGui::TreePop();
+	}
 
 	if (ImGui::TreeNodeEx("Pixel Inspector")) {
 		ImVec2 cursor_pos = ImGui::GetMousePos();
@@ -82,8 +88,11 @@ void RasterSVG::render()
 			ImVec2((inspecting_pos.x + inspecting_area.x) / image->xsize(),
 				   (inspecting_pos.y + inspecting_area.y) / image->ysize()));
 
+		int scale = zoomScale;
+		ImGui::SliderInt("Scale", &scale, 1, 8);
+		zoomScale = scale;
+		inspecting_area = vec2(128 / scale);
+
 		ImGui::TreePop();
 	}
-
-	ImGui::End();
 }

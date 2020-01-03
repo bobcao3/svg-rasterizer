@@ -23,6 +23,8 @@ public:
 	glm::vec2 inspecting_area = glm::vec2(32);
 	float zoomScale = 4;
 
+	const std::string getFilename() { return filename; };
+
 	RasterSVG(std::string file);
 	~RasterSVG();
 
@@ -32,7 +34,7 @@ public:
 
 class RasterizerApp : public Application {
 private:
-    std::vector<RasterSVG> images;
+    std::vector<RasterSVG*> images;
 
 public:
     void init();

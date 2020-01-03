@@ -11,13 +11,22 @@ void RasterizerApp::init() {
 
     // Create image output for every image in parameter
     for (auto f : params) {
-	    images.emplace_back(f);
+	    images.push_back(new RasterSVG(f));
     }
 }
 
 void RasterizerApp::tick(double time) {
-    for (RasterSVG& im : images) {
-        im.render();
+    if (ImGui::BeginMainMenuBar()) {
+        if (ImGui::BeginMenu("File")) {
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+	}
+
+    for (RasterSVG *im : images) {
+        ImGui::Begin(im->getFilename().data());
+        im->render();
+        ImGui::End();
     }
 }
 
